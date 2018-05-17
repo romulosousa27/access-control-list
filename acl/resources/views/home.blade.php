@@ -2,21 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card card-default">
-                <div class="card-header">Laravel ACL</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    Bem Vindo!
-                </div>
-            </div>
-        </div>
-    </div>
+    @forelse($noticias as $n)
+        <h1>{{$n->title}}</h1>
+        <p>{{$n->description}}</p>
+        <b>Autor: {{$n->name}}</b>
+    @empty
+        <p class="bg-danger">Nenhuma Noticia Vinculada</p>
+    @endforelse
 </div>
 @endsection
