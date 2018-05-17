@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//Use Models
+use App\Noticia;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('home');
+    public function index(Noticia $noticia){
+        // retornando todas a noticias.
+        $noticias = $noticia->all();
+
+        return view('home', compact('noticias'));
     }
 }
