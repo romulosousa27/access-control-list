@@ -15,7 +15,8 @@ class HomeController extends Controller{
 
     public function index(Noticia $noticia){
         // retornando todas a noticias.
-        $noticias = $noticia->all();
+        //$noticias = $noticia->all();
+        $noticias = $noticia->where('user_id', auth()->user()->id)->get();
         
         return view('home', compact('noticias'));  
     }
@@ -24,9 +25,9 @@ class HomeController extends Controller{
         //retornando a noticia espeficica
         $noticia = Noticia::find($noticiaID);
 
-        //$this->authorize('noticia-update', $noticia);
+        // Filtrando permissão 
         if(Gate::denies('noticia-update', $noticia)){
-            abort(403, "Não Autorizado!");
+            return view('errors.error-403');
         }
         return view('noticia-update', compact('noticia'));
     }
