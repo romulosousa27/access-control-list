@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        \App\Noticia::class =>  \App\Policies\NoticiaPolicy::class,
     ];
 
     /**
@@ -28,8 +28,10 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //definindo autorização
-        Gate::define('noticia-update', function(User $user, Noticia $noticia){
-            return $user->id == $noticia->user_id;
-        });
+        /*
+            Gate::define('noticia-update', function(User $user, Noticia $noticia){
+                return $user->id == $noticia->user_id;
+            });
+         */
     }
 }
