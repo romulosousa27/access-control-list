@@ -1,10 +1,11 @@
 <?php
 
 namespace App;
-use App\Noticia;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Noticia;
+use App\Permission;
 
 class User extends Authenticatable
 {
@@ -27,4 +28,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function rules(){
+        return $this->belongsToMany(Rules::class);
+    }
+
+    public function hasPermission(Permission $permission){
+        // retornando a permisão do usuario
+        return $this->hasAnyRules($permission->rules);
+    }
+
+    public function hasAnyRules($rules){
+        // verificando se o usuario tem esse permissão
+        if(is_array($rules) || is_object($rules)){
+            foreach($rules as $rule){
+                return $this->rules->contains('name', $rule->name);
+            }
+        }
+
+        return $this->rules->contains('name', $rules);
+    }
 }
