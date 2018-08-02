@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Gate;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        //$posts = Post::all();
+        $posts = Post::where('user_id', auth()->user()->id)->get();
         return view('home', compact('posts'));
+    }
+
+    public function update($id){
+        $post = Post::find($id);
+        //$this->authorize('update', $post);
+        if(Gate::denies('update', $post)){
+            abort(403, 'Sem Autorização');
+        }
+
+
+        return view('update', compact('post'));
     }
 }
