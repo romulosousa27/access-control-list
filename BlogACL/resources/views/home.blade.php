@@ -25,6 +25,7 @@
         <h1>{{$post->title}}</h1>
         <p>{{$post->description}}</p>
         <b>Autor: {{$post->user->name}}</b>
+        <a href="{{url("/post/$post->id/update")}}">editar</a>
         <hr>
     @empty
         <p>Nenhum Post Cadastrado</p>
