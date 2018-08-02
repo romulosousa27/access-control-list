@@ -19,5 +19,15 @@
             </div>
         </div>
     </div>
+    
+    <!-- Listando todos os Posts -->
+    @forelse($posts as $post)
+        <h1>{{$post->title}}</h1>
+        <p>{{$post->description}}</p>
+        <b>Autor: {{$post->user->name}}</b>
+        <hr>
+    @empty
+        <p>Nenhum Post Cadastrado</p>
+    @endforelse
 </div>
 @endsection
