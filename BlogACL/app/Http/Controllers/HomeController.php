@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Post;
 use Gate;
+use App\User;
+use App\Post;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -32,12 +33,10 @@ class HomeController extends Controller
 
     public function update($id){
         $post = Post::find($id);
-        //$this->authorize('update', $post);
+
         if(Gate::denies('update', $post)){
-            abort(403, 'Sem Autorização');
+           return view('errors.403');
         }
-
-
         return view('update', compact('post'));
     }
 }
