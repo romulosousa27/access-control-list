@@ -32,12 +32,12 @@ class HomeController extends Controller
     }
 
     public function update($id){
-        $posts = Post::find($id);
+        $post = Post::find($id);
 
-        if(Gate::denies('update', $posts)){
-           return view('errors.403');
+        if(Gate::denies('update', $post)){
+            return view('errors.403');
         }
-        return view('update', compact('posts'));
+        return view('update', compact('post'));
     }
 
     public function rolesPermissions(){
