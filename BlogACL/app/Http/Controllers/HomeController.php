@@ -26,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$posts = Post::all();
-        $posts = Post::where('user_id', auth()->user()->id)->get();
+        $posts = Post::all();
+        //$posts = Post::where('user_id', auth()->user()->id)->get();
         return view('home', compact('posts'));
     }
 
@@ -37,15 +37,26 @@ class HomeController extends Controller
         if(Gate::denies('update', $post)){
             return view('errors.403');
         }
-        return view('update', compact('post'));
+        return view('edit', compact('post'));
     }
 
     public function rolesPermissions(){
 
-        //recuperando o nome ,regras e permissões.
+        //recuperando o nome ,regras
         $user =  auth()->user()->name;
         $roles = auth()->user()->roles;
 
-        return view('debug', compact('user', 'roles'));
+
+        // permissão do perfil
+        foreach( auth()->user()->roles  as $roles){
+            echo $roles->name .":\n";
+
+            $permissions = $roles->permissions;
+            foreach ($permissions as $permission) {
+                echo $permission->name . "\n";
+            }
+        }
+
+        //return view('debug', compact('user', 'roles', 'permissions'));
     }
 }
