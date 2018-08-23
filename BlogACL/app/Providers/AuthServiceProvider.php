@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         }
 
         Gate::before(function(User $user, $ability){
-            if($user->hasAnyRoles('manager')){
+            if($user->hasAnyRoles('mananger')){
                 return true;
             }
         });
