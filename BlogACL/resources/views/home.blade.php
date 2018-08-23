@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-primary text-white">Dashboard</div>
+                <div class="card-header bg-primary text-white text-center">Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -30,7 +30,16 @@
             <hr>
         @endcan
     @empty
-        <p>Nenhum Post Cadastrado</p>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <p class="text-center text-danger">Nenhum Post Cadastrado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @endforelse
 </div>
 @endsection
