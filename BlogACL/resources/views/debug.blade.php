@@ -7,7 +7,7 @@
         <li class="list-group-item bg-success text-uppercase text-white">Usuário: {{$user}}</li>
         <!-- REGRAS -->
         @foreach ( $roles as $role )
-            <li class="list-group-item">{{$role->label}}</li>
+            <li class="list-group-item">{{$role->name}}</li>
         @endforeach
     </ul>
 </div>
